@@ -148,9 +148,6 @@ if __name__ == "__main__":
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_context.load_cert_chain(certfile="ssl/cert.pem", keyfile="ssl/key.pem")
 
-    available_port = find_available_port()
-    print(f"Starting server on port {available_port}")
-
     uvicorn.run(
         app,
         host="0.0.0.0",
