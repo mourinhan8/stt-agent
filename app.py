@@ -145,16 +145,6 @@ if __name__ == "__main__":
 
     import uvicorn
 
-    def find_available_port(start_port=3000, max_port=5000):
-        for port in range(start_port, max_port + 1):
-            try:
-                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                    s.bind(("0.0.0.0", port))
-                    return port
-            except OSError:
-                continue
-        raise RuntimeError("No available ports found")
-
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_context.load_cert_chain(certfile="ssl/cert.pem", keyfile="ssl/key.pem")
 
@@ -164,7 +154,7 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=available_port,
+        port=8001,
         ssl_keyfile="ssl/key.pem",
         ssl_certfile="ssl/cert.pem",
     )
